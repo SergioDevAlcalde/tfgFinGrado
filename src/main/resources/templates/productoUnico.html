@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container py-4">
+    <div class="card bg-light">
+        <div class="card-header" th:text="${titulo}"></div>
+        <div class="card-body">
+
+            <ul class="list-group">
+                <li class="list-group-item" th:text="${producto.nombre}"></li>
+                <li class="list-group-item" th:text="${producto.precio}"></li>
+                <img th:src="@{'images/' + ${producto.imagen}}" th:alt="${producto.imagen}"/>
+            </ul>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

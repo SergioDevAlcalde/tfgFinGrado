@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+    <div class="jumbotron bg-light">
+
+        <form method="post" class="container was-validated">
+            <h1>Iniciar sesión: </h1>
+                <div class="form-group mr-sm-1">
+                    <div class="col-lg-2">
+                        <label class="font-weight-bold text-dark mr-sm-2">Nombre de usuario:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" name="username" id="username" class="col-lg-5 text form-control mr-sm-2"
+                               placeholder="Nombre de usuario" required="true" autofocus="true"/>
+                    </div>
+                    <div class="valid-feedback">Válido.</div>
+                    <div class="invalid-feedback">Introduce el campo.</div>
+                </div>
+
+                <div class="form-group mr-sm-1">
+                    <div class="col-lg-2">
+                        <label class="font-weight-bold text-dark mr-sm-2">Contraseña:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="password" name="password" id="password" class="form-control input-lg"
+                               placeholder="contraseña" required="true"/>
+                    </div>
+                    <div class="valid-feedback">Válido.</div>
+                    <div class="invalid-feedback">Introduce el campo.</div>
+                </div>
+
+                <div class="form-group form-check">
+                    <div class="col-lg-2">
+                        <label class="font-weight-bold form-check-label">
+                            <input class="form-check-input" type="checkbox"/>Recordarme
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <label class="text-primary">Si no tienes cuenta, pulsa el botón de abajo:</label>
+                </div>
+
+                <div class="col-lg-4 btn-group">
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login"/>
+                    <a class="btn btn-primary mr-sm-2" th:href="@{/registro}" role="button">Crear Cuenta</a>
+                </div>
+
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

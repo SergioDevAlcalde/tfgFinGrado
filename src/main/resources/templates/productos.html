@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+
+    <h1 class="text-secundary border border-succes border-top-0" th:text="${titulo}"></h1>
+    <a class="btn btn-success btn-xs" th:href="@{/form}">Crear cliente</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>nombre</th>
+            <th>precio</th>
+        </tr>
+        </thead>
+        <!-- LE DICE QUE VAMOS A METER EN AL TABLA LOS CLIENTES QUE NOS DA EL METODO listAll -->
+        <tbody>
+        <tr th:each="producto: ${productos}">
+            <td><a th:href="@{/productoUnico/} + ${producto.id}" th:text="${producto.nombre}"></a></td>
+            <td th:text="${producto.precio}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

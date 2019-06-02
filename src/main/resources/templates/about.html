@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .row {
+            margin: 10px;
+        }
+        .jumbotron{
+
+            margin:10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+<h2 class="text-center">Autores de la tienda Online y concepto:</h2>
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h3>Adrián Campos D´Aniello</h3>
+                    <p>Llegó a este curso después de dar tumbos en el mundo del periodismo con las vista puesta en
+                    un futuro laboral mejor. </p>
+
+                    <ul>
+                        <li>
+                            Nacionalidad: español
+                        </li>
+                        <li>
+                            Edad: 29
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <div class="col">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h3>Adrián Rodríguez Díaz</h3>
+                    <p>Uruaguayo de nacimiento, llegó a España hace un par de años y se decidió a realizar el curso
+                    de DAM. Su experiencia en el mundo de la informática no es nueva, ya que curso la mitad de la ingenieria
+                    informática en su país.</p>
+                    <ul>
+
+                        <li>
+                            Nacionalidad: Uruguayo
+                        </li>
+                        <li>
+                            Edad: 32
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+         <div class="card">
+             <div class="card-header"></div>
+                <div class="card-body">
+                    <h3>Sergio Alcalde Casares</h3>
+                    <p>Informático puro y de raza, de esos que parece que han nacido con un ratón y un teclado bajo el brazo.
+                    Antes de entrar a DAM estudió el grado superior correspondiente a esta rama de conocimiento.</p>
+
+                    <ul>
+
+                        <li>
+                             Nacionalidad: español
+                        </li>
+                         <li>
+                            Edad: 21
+                        </li>
+                 </ul>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+    <div class="jumbotron bg-light">
+
+        <p>Si estas leyendo estas líneas, te encuentras ante el proyecto final de los tres alumnos, que se citan encima de este
+            texto, correspondiente al Grado Superior en Desarrollo de Aplicaciones Multiplataforma, también conocido como DAM.
+            El citado trabajo consiste en una aplicación web de e-commerce (centrada en la venta de componentes y aparatos informáticos)
+            y desarrollada en las siguientes tecnologías:
+        <ul>
+
+        <li>Front-End: Bootstrap(HTML y CSS).</li>
+        <li>Front-End: ThymeLeaf.</li>
+        <li>Back-End: Java y Spring.</li>
+        </ul>
+        </p>
+
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

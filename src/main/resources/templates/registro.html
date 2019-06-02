@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+    <div class="jumbotron bg-light">
+
+        <form action="#" th:action="@{/registro}" th:object="${cliente}" method="post" class="container was-validated">
+
+            <h1>Crear cuenta: </h1>
+            <div class="form-group mr-sm-1">
+                <label class="font-weight-bold col-lg-4 text-dark mr-sm-2">Nombre:</label>
+                <div class="col-lg-10">
+                    <input type="text" th:field="*{nombre}" class="col-lg-6 text form-control mr-sm-2"
+                           placeholder="Nombre de usuario"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+                           th:errors="*{nombre}"></small>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold col-lg-4">Apellidos:</label>
+
+                <div class="col-lg-10">
+                    <input type="text" th:field="*{apellido}" class="col-lg-3 text form-control mr-sm-2"
+                           placeholder="Apellido 1"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}"
+                           th:errors="*{apellido}"></small>
+                    <input class="col-lg-3 text form-control mr-sm-2" placeholder="Apellido 2"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold col-lg-4">Correo electrónico:</label>
+                <div class="col-lg-10">
+                    <input type="email" th:field="*{correoElectronico}" class="col-lg-6 text form-control mr-sm-2"
+                           placeholder="Correo electrónico"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('correoElectronico')}"
+                           th:errors="*{correoElectronico}"></small>
+                </div>
+            </div>
+
+            <div class="form-group mr-sm-1">
+                <label class="font-weight-bold col-lg-4 text-dark mr-sm-2">Contraseña:</label>
+                <div class="col-lg-10">
+                    <input type="password" class="col-lg-3 password form-control mr-sm-2" placeholder="Contraseña"/>
+                    <input type="password" th:field="*{contrasenya}" class="col-lg-3 password form-control mr-sm-2"
+                           placeholder="Repita la contraseña"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('contrasenya')}"
+                           th:errors="*{contrasenya}"></small>
+                </div>
+            </div>
+
+            <div class="col-lg-4 btn-group">
+                <input type="submit" value="Crear cliente" class="btn btn-primary"/>
+                <a class="btn btn-primary mr-sm-2" href="index.html" role="button">Cancelar</a>
+            </div>
+            <div class="form-group ">
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

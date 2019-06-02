@@ -30,7 +30,8 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login") .defaultSuccessUrl("/")//
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
@@ -38,13 +39,13 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
-    // create two users, admin and user
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource)
         .usersByUsernameQuery("SELECT nombre, contrasenya ,enabled FROM cliente WHERE nombre =?")
-        .authoritiesByUsernameQuery("SELECT nombre,AUTHORITY from AUTHORITIES WHERE nombre =? ");
+        .authoritiesByUsernameQuery("SELECT nombre,AUTHORITY from authorities WHERE nombre =? ");
 
     }
 }

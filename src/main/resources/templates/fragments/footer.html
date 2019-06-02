@@ -19,8 +19,7 @@
                 <div class="col text-light">Sobre nosotros</div>
                 <div class="col text-light">Otros datos</div>
                 <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
+                | Logged user: <span sec:authentication="name"></span>
                 <a th:href="@{/logout}">Sign Out</a>
             </span>
 

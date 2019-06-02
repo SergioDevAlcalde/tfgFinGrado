@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
@@ -14,6 +14,14 @@
 
 <div class="container">
     <div class="jumbotron bg-light">
+
+        <div th:if="${param.logout}" class="alert alert-success">
+            Se has deslogeado con exito.
+        </div>
+        <!-- ESTO HAY QUE PONERLO BONITO  -->
+        <span sec:authorize="isAuthenticated()">
+
+            Bienvenido de nuevo : <span sec:authentication="name"></span></span>
 
         <form method="post" class="container was-validated">
             <h1>Iniciar sesión: </h1>
@@ -54,7 +62,7 @@
                 </div>
 
                 <div class="col-lg-4 btn-group">
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login"/>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login" />
                     <a class="btn btn-primary mr-sm-2" th:href="@{/registro}" role="button">Crear Cuenta</a>
                 </div>
 

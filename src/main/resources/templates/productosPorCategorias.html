@@ -15,16 +15,16 @@
 <h1 th:tex="${categoriaCategory.getNombre()}"></h1>
 
 <div class="row">
-    <div class="col-2" th:each="prod: ${ productCategory}">
+    <div class="col-3" th:each="prod: ${ productCategory}">
         <div class="card">
             <div class="card-body">
                 <div class="card-header">
-                    <img th:src="@{'images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
+                    <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
                 </div>
                 <h4 class="card-title text-dark" th:text="${prod.getNombre()}"></h4>
                 <p class="card-text text-dark" th:text="${prod.getId()}"></p>
                 <p class="card-text text-dark" th:text="${prod.getPrecio()}"></p>
-                <a th:href="@{/productos.html}" class="btn btn-primary">Comprar</a>
+                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
             </div>
         </div>
     </div>

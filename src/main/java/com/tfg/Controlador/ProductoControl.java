@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -65,6 +63,14 @@ public class ProductoControl {
     return productosFiltrados;
   }
 
+  public List<Producto> getAllProductos(){
+    List<Producto> productos = productoService.findAll();
+    return productos;
+  }
 
+  public Producto getProductoById(Long id){
+    Producto prod = productoService.findOne(id);
+    return prod;
+  }
 
 }

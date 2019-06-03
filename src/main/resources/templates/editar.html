@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Editar Usuario</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+    <div clas="jumbotron bg-light">
+        <div class="form-group mr-sm-1">
+            <div class="col-lg-2">
+                <label class="font-weight-bold text-dark mr-sm-2">Cambiar nombre de usuario:</label>
+            </div>
+            <div class="col-lg-10">
+                <input type="text" name="username" id="username" class="col-lg-5 text form-control mr-sm-2"
+                       placeholder="Nombre de usuario" required="true" autofocus="true"/>
+            </div>
+            <div class="valid-feedback">Válido.</div>
+            <div class="invalid-feedback">Introduce el campo.</div>
+        </div>
+
+    </div>
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

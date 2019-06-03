@@ -24,11 +24,12 @@
         <div class="card">
             <div th:text="${cat1.getNombre()}" class="card-header text-primary font-weight-bold">
                 <img class="img-fluid" src="procesador.jpg" alt="procesador" width="100%"/>
-                </div>
+            </div>
             <div class="card-body">
                 <p>La mejor selección de componentes informáticos que puedes encontrar en el mercado. Entra para ver los
                     precios.</p>
-                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat1.getNombre()}" th:href="@{/productosPorCategorias}"></a>
+                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat1.getNombre()}"
+                   th:href="@{'/productosPorCategorias/'+${cat1.getId()}}" th:method="POST"></a>
             </div>
         </div>
     </div>
@@ -39,11 +40,12 @@
         <div class="card">
             <div th:text="${cat2.getNombre()}" class="card-header text-primary font-weight-bold">
                 <img class="img-fluid" src="procesador.jpg" alt="procesador" width="100%"/>
-                </div>
+            </div>
             <div class="card-body">
                 <p>La mejor selección de componentes informáticos que puedes encontrar en el mercado. Entra para ver los
                     precios.</p>
-                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat2.getNombre()}" th:href="@{/productosPorCategorias}"></a>
+                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat2.getNombre()}"
+                   th:href="@{'/productosPorCategorias/'+${cat2.getId()}}" th:method="POST"></a>
             </div>
         </div>
     </div>
@@ -55,11 +57,12 @@
         <div class="card">
             <div th:text="${cat3.getNombre()}" class="card-header text-primary font-weight-bold">
                 <img class="img-fluid" src="procesador.jpg" alt="procesador" width="100%"/>
-                </div>
+            </div>
             <div class="card-body">
                 <p>La mejor selección de componentes informáticos que puedes encontrar en el mercado. Entra para ver los
                     precios.</p>
-                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat3.getNombre()}" th:href="@{/productosPorCategorias}"></a>
+                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat3.getNombre()}"
+                   th:href="@{'/productosPorCategorias/'+${cat3.getId()}}" th:method="POST"></a>
             </div>
         </div>
     </div>
@@ -71,11 +74,24 @@
         <div class="card">
             <div th:text="${cat4.getNombre()}" class="card-header text-primary font-weight-bold">
                 <img class="img-fluid" src="procesador.jpg" alt="procesador" width="100%"/>
-                </div>
+            </div>
             <div class="card-body">
                 <p>La mejor selección de componentes informáticos que puedes encontrar en el mercado. Entra para ver los
                     precios.</p>
-                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat4.getNombre()}" th:href="@{/productosPorCategorias}"></a>
+                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:text="${cat4.getNombre()}"
+                   th:href="@{'/productosPorCategorias/'+${cat4.getId()}}" th:method="POST"></a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-header text-primary font-weight-bold">
+                Categoría al azar
+            </div>
+            <div class="card-body">
+                <p>Dejate llevar y que sea la propia web la que eliga la categoría a la que quieres ir. Para los más arr
+                    iesgados</p>
+                <a class="btn btn-primary mr-sm-2 align-self-end" role="button" th:href="@{/productosPorCategorias}">Al azar</a>
             </div>
         </div>
     </div>

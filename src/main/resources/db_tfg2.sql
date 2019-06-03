@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 02-06-2019 a las 20:02:49
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 03-06-2019 a las 22:31:38
+-- Versión del servidor: 5.7.19-log
+-- Versión de PHP: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_tfg`
+-- Base de datos: `db_tfg2`
 --
 
 -- --------------------------------------------------------
@@ -28,10 +28,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `authorities`
 --
 
-CREATE TABLE `authorities` (
+DROP TABLE IF EXISTS `authorities`;
+CREATE TABLE IF NOT EXISTS `authorities` (
   `NOMBRE` varchar(50) NOT NULL,
   `AUTHORITY` varchar(50) NOT NULL,
-  `ID` bigint(20) DEFAULT NULL
+  `ID` bigint(20) DEFAULT NULL,
+  KEY `FK_AUTHORITIES_USERS` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -50,23 +52,25 @@ INSERT INTO `authorities` (`NOMBRE`, `AUTHORITY`, `ID`) VALUES
 -- Estructura de tabla para la tabla `categoria`
 --
 
-CREATE TABLE `categoria` (
-  `id` bigint(255) NOT NULL,
-  `nombre` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `id` bigint(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(1, 'procesadores'),
-(2, 'perifericos'),
+(1, 'Procesadores'),
+(2, 'Perifericos'),
 (3, 'Televisores'),
 (4, 'Telefonia'),
-(5, 'placas_base'),
-(6, 'discos_duros'),
-(7, 'tarjetas_graficas');
+(5, 'Placas Base'),
+(6, 'Discos Duros'),
+(7, 'Tarjetas Graficas');
 
 -- --------------------------------------------------------
 
@@ -74,14 +78,16 @@ INSERT INTO `categoria` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
-CREATE TABLE `cliente` (
-  `id` bigint(255) NOT NULL,
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `id` bigint(255) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
   `contrasenya` varchar(255) NOT NULL,
   `correo_electronico` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -134,60 +140,47 @@ INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `contrasenya`, `correo_electr
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `factura`
+-- Estructura de tabla para la tabla `orden`
 --
 
-CREATE TABLE `factura` (
-  `id` bigint(255) NOT NULL,
-  `id_pedido` int(255) NOT NULL,
-  `id_forma_pago` bigint(255) NOT NULL,
-  `fecha` date NOT NULL,
-  `total` bigint(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `forma_pago`
---
-
-CREATE TABLE `forma_pago` (
-  `id` bigint(20) NOT NULL,
-  `tipo` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `forma_pago`
---
-
-INSERT INTO `forma_pago` (`id`, `tipo`) VALUES
-(1, 'tarjeta'),
-(2, 'efectivo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pedido`
---
-
-CREATE TABLE `pedido` (
-  `id` bigint(255) NOT NULL,
+DROP TABLE IF EXISTS `orden`;
+CREATE TABLE IF NOT EXISTS `orden` (
+  `id` bigint(255) NOT NULL AUTO_INCREMENT,
+  `total` double NOT NULL,
+  `fecha` datetime NOT NULL,
   `id_cliente` bigint(255) NOT NULL,
-  `id_pedido_prod` bigint(255) NOT NULL
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido_producto`
+-- Estructura de tabla para la tabla `orden_detalles`
 --
 
-CREATE TABLE `pedido_producto` (
-  `id` bigint(255) NOT NULL,
-  `id_pedido` bigint(255) NOT NULL,
-  `id_producto` bigint(255) NOT NULL,
-  `cantidad` bigint(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `orden_detalles`;
+CREATE TABLE IF NOT EXISTS `orden_detalles` (
+  `ID` bigint(255) NOT NULL AUTO_INCREMENT,
+  `CLIENTE_ID` bigint(255) NOT NULL,
+  `PRODUCT_ID` bigint(255) NOT NULL,
+  `PRODUCT_IMG` varchar(255) DEFAULT NULL,
+  `PRODUCT_NOMBRE` varchar(255) DEFAULT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `PRECIO_PROD` double NOT NULL,
+  `TOTAL` double NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ORDEN_CLIENTE_FK` (`CLIENTE_ID`),
+  KEY `ORDEN_DETALLE_PROD_FK` (`PRODUCT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1020 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `orden_detalles`
+--
+
+INSERT INTO `orden_detalles` (`ID`, `CLIENTE_ID`, `PRODUCT_ID`, `PRODUCT_IMG`, `PRODUCT_NOMBRE`, `CANTIDAD`, `PRECIO_PROD`, `TOTAL`) VALUES
+(1005, 1, 10001, '10001.jpg', 'Procesador AMD Ryzen 5 2600 3.4 Ghz\r\n', 1, 151.99, 151.99),
+(1016, 1, 10003, '10003.jpg', 'Intel Core i7-8700 3.2Ghz BOX', 1, 309.9, 309.9),
+(1018, 1, 50001, '50001.jpg', 'Gigabyte GA-B360M DS3H', 1, 69.99, 69.99);
 
 -- --------------------------------------------------------
 
@@ -195,15 +188,18 @@ CREATE TABLE `pedido_producto` (
 -- Estructura de tabla para la tabla `producto`
 --
 
-CREATE TABLE `producto` (
-  `id` bigint(255) NOT NULL,
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE IF NOT EXISTS `producto` (
+  `id` bigint(255) NOT NULL AUTO_INCREMENT,
   `id_categoria` bigint(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `precio` double NOT NULL,
   `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `fotografia` varchar(255) DEFAULT NULL,
-  `portada` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `portada` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `categoria` (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=70008 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `producto`
@@ -260,104 +256,6 @@ INSERT INTO `producto` (`id`, `id_categoria`, `nombre`, `precio`, `descripcion`,
 (70007, 7, 'Sapphire Nitro+ Radeon RX 590 8GB GDDR5 UEFI', 239.99, 'La serie SAPPHIRE NITRO+ cuenta con las últimas tecnologías de alto rendimiento: núcleos de edición limitada, Tri-XX, las mejores tecnologías de refrigeración y mucho más. Con contornos elegantes y un estilo único, se adaptan fácilmente a cualquier ordenador que quieras ensamblar. Con la última arquitectura de gráficos AMD, con NITRO+ tendrás una experiencia de juego rápida y confiable, sea cual sea tu juego.', '70007.jpg', 0);
 
 --
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `authorities`
---
-ALTER TABLE `authorities`
-  ADD KEY `FK_AUTHORITIES_USERS` (`ID`);
-
---
--- Indices de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `forma_pago` (`id_forma_pago`);
-
---
--- Indices de la tabla `forma_pago`
---
-ALTER TABLE `forma_pago`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cliente` (`id_cliente`),
-  ADD KEY `pedido_producto` (`id_pedido_prod`);
-
---
--- Indices de la tabla `pedido_producto`
---
-ALTER TABLE `pedido_producto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `producto` (`id_producto`),
-  ADD KEY `pedido` (`id_pedido`);
-
---
--- Indices de la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `categoria` (`id_categoria`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- AUTO_INCREMENT de la tabla `factura`
---
-ALTER TABLE `factura`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pedido_producto`
---
-ALTER TABLE `pedido_producto`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70008;
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -368,24 +266,11 @@ ALTER TABLE `authorities`
   ADD CONSTRAINT `FK_AUTHORITIES_USERS` FOREIGN KEY (`ID`) REFERENCES `cliente` (`id`);
 
 --
--- Filtros para la tabla `factura`
+-- Filtros para la tabla `orden_detalles`
 --
-ALTER TABLE `factura`
-  ADD CONSTRAINT `forma_pago` FOREIGN KEY (`id_forma_pago`) REFERENCES `forma_pago` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pedido_producto` FOREIGN KEY (`id_pedido_prod`) REFERENCES `pedido_producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pedido_producto`
---
-ALTER TABLE `pedido_producto`
-  ADD CONSTRAINT `pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `orden_detalles`
+  ADD CONSTRAINT `ORDEN_CLIENTE_FK` FOREIGN KEY (`CLIENTE_ID`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `ORDEN_DETALLE_PROD_FK` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `producto` (`id`);
 
 --
 -- Filtros para la tabla `producto`

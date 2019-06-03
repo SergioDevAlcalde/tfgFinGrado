@@ -17,27 +17,36 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th></th>
-            <th>Confirmar</th>
+            <th>Imagen</th>
+            <th>Id Producto</th>
             <th>Nombre</th>
             <th>Cantidad</th>
             <th>Precio</th>
+            <th>Total</th>
+            <th>Quitar</th>
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        <tr th:each="orden: ${ordenDetalles}">
+            <td><img th:src="@{'/images/products/'+${orden.getImagen()}}" alt="producto" height="42" width="42"/></td>
+            <td th:text="${orden.getIdProducto()}"></td>
+            <td th:text="${orden.getNombre_prod()}"></td>
+            <td th:text="${orden.getCantidad()}"></td>
+            <td th:text="${orden.getPrecio_prod()}"></td>
+            <td th:text="${orden.getTotal()}"></td>
+            <td>
+                <a class="btn btn-outline-danger" th:height="5" th:width="5"
+                   th:href="@{'quitarDeCarro/'+${orden.getId()}}" th:method="POST">x</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-primary" href="{/}">Confirmar compra</button>
-    <button type="button" class="btn btn-primary" href="{/}">Cancelar</button>
+
+    <a type="button" class="btn btn-primary" th:href="@{/}">Confirmar compra</a>
+    <a type="button" class="btn btn-primary" th:href="@{/}">Seguir Navegando</a>
 </div>
+
 
 <div th:replace="fragments/footer :: footer">...</div>
 

@@ -13,19 +13,27 @@
             <h1 class="text-light">Online Store</h1>
             <div class="row">
                 <div class="col text-light">Secciones:
-                    <p>Hola</p>
-                    <p>Adiós</p>
+                    <p><a th:href="@{/}">Home</a></p>
+                    <p><a th:href="@{/about/}">Nosotros</a></p>
+                    <p><a th:href="@{/categorias/}">Categorías</a></p>
+                    <p><a th:href="@{/login/}">Login/Registro</a></p>
+                    <p><a th:href="@{/carrito/}">Carrito</a></p>
                 </div>
-                <div class="col text-light">Sobre nosotros</div>
-                <div class="col text-light">Otros datos</div>
-                <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span>
-                <a th:href="@{/logout}">Sign Out</a>
+                <div class="col text-light"><h6>Sobre nosotros</h6>
+                    <p>Si estas leyendo estas líneas, te encuentras ante el proyecto final de los tres alumnos, que se citan encima de este
+                        texto, correspondiente al Grado Superior en Desarrollo de Aplicaciones Multiplataforma, también conocido como DAM.
+                        El citado trabajo consiste en una aplicación web de e-commerce (centrada en la venta de componentes y aparatos informáticos)
+                        y desarrollada en las siguientes tecnologías:</p>
+                </div>
+                <div class="col">
+                <span class="text-light" sec:authorize="isAuthenticated()">
+                Usuario: <span sec:authentication="name"></span>
+                <a th:href="@{/logout}">Sign Out</a> |
+                    <a class="nav-link" th:href="@{/editar/}">Edit</a>
             </span>
-
-
+                </div>
             </div>
-            <p class="text-light">Esta sección se encuentra actualmente en construcción.</p>
+            <p class="text-light">©Todos los derechos reservados, 2018/2019.</p>
         </div>
     </footer>
 </div>

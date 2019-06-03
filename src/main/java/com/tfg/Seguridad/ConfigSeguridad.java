@@ -25,8 +25,8 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/index", "/registro", "/about","/categorias","productosPorCategorias","productoUnico").permitAll()
-                .antMatchers("/carrito").hasAnyRole("ROLE_USER")
+                .antMatchers("/","/index", "/registro", "/about","/categorias","/carrito","../carrito","productosPorCategorias","productoUnico","agregarEnCarro","quitarDeCarro").permitAll()
+                //.antMatchers("/carrito").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

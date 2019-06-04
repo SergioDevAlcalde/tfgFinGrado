@@ -1,11 +1,15 @@
 package com.tfg.Controlador;
 
 import com.tfg.modelo.entity.Categoria;
+import com.tfg.modelo.entity.Cliente;
 import com.tfg.modelo.entity.OrdenDetalle;
 import com.tfg.modelo.entity.Producto;
 import com.tfg.modelo.service.CategoriaServiceImpl;
 import com.tfg.modelo.service.ProductoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,43 +38,60 @@ private ProductoServiceImpl implementacion;
     @Autowired
     OrdenDetalleController detalleControl;
 
+
     @RequestMapping(value = "/")
     public String home(Map data){
 
-        LocalDate date=LocalDate.now();
-        long identificador= (long) Math.floor(Math.random()*7+1);
-        ArrayList<Producto> productos= (ArrayList<Producto>) productoControl.getProductByCategory(identificador);
+        //Sacar las dos categorías inferiores
+        ArrayList<Producto> productos= listar();
         Producto producto=productos.get(0);
         Categoria categoria= categoriaService.findOne(producto.getIdCategoria());
 
-
-        long identificador2= (long) Math.floor(Math.random()*7+1);
-        ArrayList<Producto> productos2= (ArrayList<Producto>) productoControl.getProductByCategory(identificador2);
+        ArrayList<Producto> productos2= listar();
         Producto producto_otro=productos2.get(0);
         Categoria categoria_otra=categoriaService.findOne(producto_otro.getIdCategoria());
+        //fin sacar las categorías inferiores
 
-        //Para la portada
+        //PARA EL CAROUSEL DE LA PORTADA****************************
         ArrayList<Producto> productosPort= (ArrayList<Producto>) implementacion.findAll();
         ArrayList<Producto> productosPortada= new ArrayList<>();
+        ArrayList<Producto> productosPortada1= new ArrayList<>();
         ArrayList<Producto> productosPortada2= new ArrayList<>();
+        ArrayList<Producto> productosPortada3= new ArrayList<>();
 
+        //sacar los productos de la portada y guardarlos en una lista
+        for(Producto prod: productosPort){
+
+            if(prod.getPortada()) {
+                productosPortada.add(prod);
+            }//if
+        }//for
+        //lista uno de la portada
         for(int i=0; i<3; i++){
 
-            productosPortada.add(productosPort.get(i));
-        }
+            productosPortada1.add(productosPortada.get(i));
+        }//for
+
+        //lista dos de la portada
         for(int i=3; i<6; i++){
 
-            productosPortada2.add(productosPort.get(i));
+            productosPortada2.add(productosPortada.get(i));
+        }//for
 
-        }
+        //lista tres de la portada
+        for(int i=6; i<9; i++){
+            productosPortada3.add(productosPortada.get(i));
+        }//for
+        //FIN CAROUSEL PORTADA ********************************
+
         //Añadir todos los datos al mapa para ThymeLeaf
         data.put("productos", productos);
         data.put("categoria", categoria);
         data.put("productos_otro", productos2);
         data.put("categoria_otra", categoria_otra);
-        data.put("date", date);
-        data.put("productosPortada", productosPortada);
+        data.put("productosPortada1", productosPortada1);
         data.put("productosPortada2", productosPortada2);
+        data.put("productosPortada3", productosPortada3);
 
         return "index";
     }
@@ -164,15 +185,32 @@ private ProductoServiceImpl implementacion;
     @RequestMapping("/carrito")
     public String carrito(Map data) {
 
+        //Cliente cli = cli.getId();
+
         ArrayList<OrdenDetalle> listaDetalles = (ArrayList<OrdenDetalle>) detalleControl.getOrdenDetalles((long) 1);
 
         data.put("ordenDetalles",listaDetalles);
         return "carrito";
     }
 
+
     @RequestMapping(value = "/agregarEnCarro/{id}")
     public String agregoEnCarro(@PathVariable("id") Long id){
-        System.out.println(id);
+
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getDetails().getClass());
+
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        //String userName = userDetails.
+        //System.out.println(userName);
+
+
+
         Producto producto = productoControl.getProductoById(id);
         OrdenDetalle orden = new OrdenDetalle((long) 1,
                 producto.getId(),1,producto.getPrecio(),
@@ -205,5 +243,17 @@ private ProductoServiceImpl implementacion;
         data.put("productos", productos);
 
         return "productoUnico";}
+
+
+    /*OTROS MÉTODOS*/
+
+    public ArrayList<Producto> listar(){
+
+        long identificador= (long) Math.floor(Math.random()*7+1);
+        ArrayList<Producto> productos= (ArrayList<Producto>) productoControl.getProductByCategory(identificador);
+
+        return productos;
+    }//listar()
+
 
 }

@@ -17,7 +17,7 @@
     </style>
 
     <style>
-        /* Make the image fully responsive */
+        /* Hacer la imagen responsiva */
         .carousel-inner img {
             width: 100%;
             height: 100%;
@@ -49,17 +49,17 @@
             <div class="carousel-caption">
                 <h3 class="text-light">Las mejores ofertas</h3>
                 <div class="row">
-                    <div class="col" th:each="prod: ${productosPortada}">
+                    <div class="col" th:each="prod: ${productosPortada1}">
                         <div class="card">
                             <div class="card-header">
-                            <img th:src="@{'images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
+                                <img th:src="@{'images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
                             </div>
-                                <div class="card-body">
+                            <div class="card-body">
                                 <h4 class="text-dark" th:text="${prod.getNombre()}"></h4>
-                                <h5 class="text-dark">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
-                                    <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Saber mas</a>
-                                </div>
+                                <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Comprar</a>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,15 +69,15 @@
             <div class="carousel-caption">
                 <h3 class="text-light">Visita nuestra tienda</h3>
                 <div class="row">
-                    <div class="col" th:each="prod: ${productosPortada}">
+                    <div class="col" th:each="prod: ${productosPortada3}">
                         <div class="card">
                             <div class="card-header">
                                 <img th:src="@{'images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
                             </div>
                             <div class="card-body">
                                 <h4 class="text-dark" th:text="${prod.getNombre()}"></h4>
-                                <h5 class="text-dark">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
-                                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Saber mas</a>
+                                <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -96,64 +96,61 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="text-dark" th:text="${prod.getNombre()}"></h4>
-                                <h5 class="text-dark">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
-                                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Saber mas</a>
+                                <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Comprar</a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
+
+        <!-- Controladores de izquierda y derecha -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
     </div>
 
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
 </div>
 
-</div>
-
-<div class="container mt-7">
-    <h1 th:text="${categoria.getNombre()}"></h1>
-
+<div class="container mt-7" style="margin-top:2%; margin-bottom: 4%;">
+    <h4 class="text-center" th:text="${categoria.getNombre()}"></h4>
 
     <div class="row">
         <div class="owl-carousel owl-theme">
             <div class="owl-item" th:each="prod: ${productos}">
-            <div class="card">
-                <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
-                <div class="card-body">
-                    <h4 th:text="${prod.getNombre()}"></h4>
-                    <h5>$<span class="text-center" th:text="${prod.getPrecio()}"></span></h5>
-                    <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Saber mas</a>
+                <div class="card">
+                    <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
+                    <div class="card-body">
+                        <h4 th:text="${prod.getNombre()}"></h4>
+                        <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                        <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Comprar</a>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
     </div>
-    <h1 th:text="${categoria_otra.getNombre()}"></h1>
+    <h4 class="text-center" th:text="${categoria_otra.getNombre()}"></h4>
 
     <div class="row">
 
         <div class="owl-carousel owl-theme">
             <div class="owl-item" th:each="prod: ${productos_otro}">
-                    <div class="card">
-                        <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
-                        <div class="card-body">
-                            <h4 th:text="${prod.getNombre()}"></h4>
-                            <h5>$<span class="text-center" th:text="${prod.getPrecio()}"></span></h5>
-                            <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Saber mas</a>
-                        </div>
+                <div class="card">
+                    <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="img-responsive" style="width:50%"/>
+                    <div class="card-body">
+                        <h4 th:text="${prod.getNombre()}"></h4>
+                        <h5 class="text-dark text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                        <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary btn-sm">Comprar</a>
                     </div>
+                </div>
             </div>
         </div>
-
     </div>
-
 </div>
 <div th:replace="fragments/footer :: footer">...</div>
 </body>

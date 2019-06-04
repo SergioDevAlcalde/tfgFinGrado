@@ -12,19 +12,19 @@
 <body>
 <div th:replace="fragments/header :: header">...</div>
 
-<h1 th:tex="${categoriaCategory.getNombre()}"></h1>
-
-<div class="row">
-    <div class="col-3" th:each="prod: ${ productCategory}">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-header">
-                    <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
+<div class="container" style="margin-top:4%; margin-bottom:4%;">
+    <h4 th:tex="${categoriaCategory.getNombre()}">Categoría: </h4>
+    <div class="row">
+        <div class="col-3" th:each="prod: ${ productCategory}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">
+                        <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
+                    </div>
+                    <h4 class="card-title text-dark" th:text="${prod.getNombre()}"></h4>
+                    <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                    <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
                 </div>
-                <h4 class="card-title text-dark" th:text="${prod.getNombre()}"></h4>
-                <p class="card-text text-dark" th:text="${prod.getId()}"></p>
-                <p class="card-text text-dark" th:text="${prod.getPrecio()}"></p>
-                <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ public class ClienteServiceImpl implements IClienteService {
 
         Authoritie authoritie = new Authoritie();
 
-        authoritie.setNombre(cliente.getNombre());
+        authoritie.setEmail(cliente.getCorreoElectronico());
         authoritie.setAuthority("ROLE_USER");
         authoritie.setId(cliente.getId());
 
@@ -61,9 +61,17 @@ public class ClienteServiceImpl implements IClienteService {
     public Cliente clienteLogin (String nombre, String password){
 
         Cliente cliente = clienteDao.getClienteByName(nombre,password);
-
         return cliente;
+    }
 
+    public Long idPorCorreo(String correo){
+
+        List<Cliente> clientes = (List<Cliente>) clienteDao.findAll();
+        Cliente cl = null;
+        for(Cliente c: clientes){
+            if(c.getCorreoElectronico().equals(correo)) return c.getId();
+        }
+        return 0L;
 
     }
 

@@ -40,13 +40,12 @@
                             <div class="form-group mr-sm-1">
                                 <label>Cantidad:</label>
                                 <div class="row">
-                                    <div class="col">
-                                        <input class="text form-control mr-sm-2" placeholder="Cantidad"/>
+                                    <div class="col" th:object="${producto}" th:method="post">
+                                        <input class="text form-control mr-sm-2" placeholder="Cantidad" type="number" th:field="*{pedido}" />
                                     </div>
                                     <div class="col">
-                                        <div class="btn-group">
-                                            <button type="submit" class="btn-primary">+</button>
-                                            <button type="submit" class="btn-primary">-</button>
+                                        <div>
+                                            <p>Stock disponible: <span class="text-center" th:text="${producto.getStock()}"></span> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -71,13 +70,13 @@
         <div class="owl-carousel owl-theme">
 
             <div class="owl-item" th:each="prod: ${ productos}">
-                <div class="card" id="columna">
-                    <div class="card-body">
+                <div class="card" id="columna" style="height:450px; margin-right: 2%;">
+                    <div class="card-body d-flex flex-column justify-content-around">
                         <div class="card-header">
                             <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
                         </div>
-                        <h4 class="card-title text-dark" th:text="${prod.getNombre()}"></h4>
-                        <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                        <h4 class="card-title text-dark text-center" th:text="${prod.getNombre()}"></h4>
+                        <h5 class="text-muted text-center">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
                         <a th:href="@{'/productoUnico/'+${prod.getId()}}"  class="btn btn-primary">Comprar</a>
                     </div>
                 </div>
@@ -110,7 +109,7 @@
                     items: 3
                 },
                 1000: {
-                    items: 5
+                    items: 4
                 }
             }
         });

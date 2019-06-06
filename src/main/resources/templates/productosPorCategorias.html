@@ -16,13 +16,13 @@
     <h4 th:tex="${categoriaCategory.getNombre()}">Categoría: </h4>
     <div class="row">
         <div class="col-3" th:each="prod: ${ productCategory}">
-            <div class="card">
-                <div class="card-body">
+            <div class="card" style="height:450px; margin-top:10px;">
+                <div class="card-body d-flex flex-column justify-content-around">
                     <div class="card-header">
                         <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
                     </div>
-                    <h4 class="card-title text-dark" th:text="${prod.getNombre()}"></h4>
-                    <h5 class="text-muted">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                    <h4 class="card-title text-dark text-center" th:text="${prod.getNombre()}"></h4>
+                    <h5 class="text-muted text-center">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
                     <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
                 </div>
             </div>

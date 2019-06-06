@@ -5,7 +5,9 @@ import com.tfg.modelo.entity.Cliente;
 import com.tfg.modelo.entity.OrdenDetalle;
 import com.tfg.modelo.entity.Producto;
 import com.tfg.modelo.service.CategoriaServiceImpl;
+import com.tfg.modelo.service.ClienteServiceImpl;
 import com.tfg.modelo.service.ProductoServiceImpl;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ private ProductoServiceImpl implementacion;
     CategoriaServiceImpl categoriaService;
     @Autowired
     OrdenDetalleController detalleControl;
+    @Autowired
+    ClienteServiceImpl cliente;
 
 
     @RequestMapping(value = "/")
@@ -185,9 +190,10 @@ private ProductoServiceImpl implementacion;
     @RequestMapping("/carrito")
     public String carrito(Map data) {
 
-        //Cliente cli = cli.getId();
+        String correoCliente = correoUser();
+        Long idCliente = cliente.idPorCorreo(correoCliente);
 
-        ArrayList<OrdenDetalle> listaDetalles = (ArrayList<OrdenDetalle>) detalleControl.getOrdenDetalles((long) 1);
+        ArrayList<OrdenDetalle> listaDetalles = (ArrayList<OrdenDetalle>) detalleControl.getOrdenDetalles(idCliente);
 
         data.put("ordenDetalles",listaDetalles);
         return "carrito";
@@ -197,32 +203,31 @@ private ProductoServiceImpl implementacion;
     @RequestMapping(value = "/agregarEnCarro/{id}")
     public String agregoEnCarro(@PathVariable("id") Long id){
 
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getDetails().getClass());
+        //System.out.println("el pedido recibido: "+pedido);
 
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = null;
-        if (principal instanceof UserDetails) {
-            userDetails = (UserDetails) principal;
-        }
-        //String userName = userDetails.
-        //System.out.println(userName);
-
-
+        String correoCliente = correoUser();
+        Long idCliente = cliente.idPorCorreo(correoCliente);
 
         Producto producto = productoControl.getProductoById(id);
-        OrdenDetalle orden = new OrdenDetalle((long) 1,
-                producto.getId(),1,producto.getPrecio(),
-                producto.getPrecio(),producto.getImagen(),producto.getNombre());
+        System.out.println(producto.getPedido());
+        OrdenDetalle orden = new OrdenDetalle(idCliente,
+                producto.getId(),producto.getPedido(),producto.getPrecio(),
+                producto.getPrecio()*producto.getPedido(),producto.getImagen(),producto.getNombre());
+        producto.setStock(producto.getStock()-producto.getPedido());
         detalleControl.save(orden);
+
+
 
         return "redirect:"+"../carrito";
     }
 
     @RequestMapping(value = "/quitarDeCarro/{id}")
     public String borroDeCarro(@PathVariable("id") Long id){
-        System.out.println(id);
+
+
+        //Producto producto = productoControl.getProductoById(id);
+        //producto.setStock(producto.getStock()+1);
+
         detalleControl.delete(id);
         return "redirect:"+"../carrito";
     }
@@ -254,6 +259,17 @@ private ProductoServiceImpl implementacion;
 
         return productos;
     }//listar()
+
+    //Obtener correo de usuario logueado
+    public String correoUser(){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        return userDetails.getUsername();
+    }
 
 
 }

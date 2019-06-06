@@ -23,6 +23,28 @@ public class Producto implements Serializable {
   @Column(name = "fotografia")
   String imagen;
 
+  @Column(name = "Stock")
+  Integer stock;
+
+  @Column(name = "pedido")
+  Integer pedido;
+
+  public Integer getStock() {
+    return stock;
+  }
+
+  public void setStock(Integer stock) {
+    this.stock = stock;
+  }
+
+  public Integer getPedido() {
+    return pedido;
+  }
+
+  public void setPedido(Integer pedido) {
+    this.pedido = pedido;
+  }
+
   public String getDescripcion() {
     return descripcion;
   }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Authoritie {
 
     @NotEmpty
-    String nombre;
+    String email;
 
     @NotEmpty
     String authority;
@@ -23,19 +23,19 @@ public class Authoritie {
     }
 
 
-    public Authoritie(String nombre, String authority, float id) {
-        this.nombre = nombre;
+    public Authoritie(String email, String authority, float id) {
+        this.email = email;
         this.authority = authority;
         this.id = id;
     }
 
 
-    public String getNombre() {
-        return nombre;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEmail(String nombre) {
+        this.email = nombre;
     }
 
     public String getAuthority() {

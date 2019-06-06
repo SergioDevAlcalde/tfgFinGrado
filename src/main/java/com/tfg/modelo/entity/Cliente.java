@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Entity
+
 @Table(name = "cliente")
 public class Cliente  implements Serializable {
 

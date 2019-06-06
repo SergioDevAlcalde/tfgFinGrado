@@ -40,8 +40,8 @@
                             <div class="form-group mr-sm-1">
                                 <label>Cantidad:</label>
                                 <div class="row">
-                                    <div class="col" th:object="${producto}" th:method="post">
-                                        <input class="text form-control mr-sm-2" placeholder="Cantidad" type="number" th:field="*{pedido}" />
+                                    <div class="col" th:object="{cantidad}" th:method="post">
+                                        <input th:field="*{cantidad}" class="text form-control mr-sm-2" placeholder="Cantidad" type="number" />
                                     </div>
                                     <div class="col">
                                         <div>

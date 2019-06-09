@@ -26,8 +26,19 @@ public class Producto implements Serializable {
   @Column(name = "Stock")
   Integer stock;
 
-  @Column(name = "pedido")
-  Integer pedido;
+  @Column(name = "descuento")
+  Integer descuento;
+
+  @Column(name = "Preciodescuento")
+  Double precioDescuento;
+
+  public Double getPrecioDescuento() {
+    return precioDescuento;
+  }
+
+  public void setPrecioDescuento(Double precioDescuento) {
+    this.precioDescuento = precioDescuento;
+  }
 
   public Integer getStock() {
     return stock;
@@ -37,12 +48,12 @@ public class Producto implements Serializable {
     this.stock = stock;
   }
 
-  public Integer getPedido() {
-    return pedido;
+  public Integer getDescuento() {
+    return descuento;
   }
 
-  public void setPedido(Integer pedido) {
-    this.pedido = pedido;
+  public void setDescuento(Integer descuento) {
+    this.descuento = descuento;
   }
 
   public String getDescripcion() {

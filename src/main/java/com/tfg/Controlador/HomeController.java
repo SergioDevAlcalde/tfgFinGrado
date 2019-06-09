@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -105,11 +106,10 @@ private ProductoServiceImpl implementacion;
     @RequestMapping("/productosPorCategorias")
     public String productsBySection(Map data){
 
-        long identificador= (long) Math.floor(Math.random()*7+1);
-        ArrayList<Producto> productos= (ArrayList<Producto>) productoControl.getProductByCategory(identificador);
 
-        Producto producto=productos.get(0);
-        Categoria categoria= categoriaService.findOne(producto.getId());
+        ArrayList<Producto> productos= listar();
+
+        Categoria categoria= categoriaService.findOne(productos.get(0).getIdCategoria());
 
         data.put("productCategory", productos);
         data.put("categoriaCategory", categoria);
@@ -122,8 +122,7 @@ private ProductoServiceImpl implementacion;
 
         ArrayList<Producto> productos= (ArrayList<Producto>) productoControl.getProductByCategory(id);
 
-        Producto producto=productos.get(0);
-        Categoria categoria= categoriaService.findOne(producto.getId());
+        Categoria categoria= categoriaService.findOne(productos.get(0).getIdCategoria());
 
         data.put("productCategory", productos);
         data.put("categoriaCategory", categoria);
@@ -200,25 +199,28 @@ private ProductoServiceImpl implementacion;
     }
 
 
-    @RequestMapping(value = "/agregarEnCarro/{id}")
-    public String agregoEnCarro(@PathVariable("id") Long id){
+    @RequestMapping(value = "/agregarEnCarro/{id}/{pedido}", method = RequestMethod.GET)
+    public String agregoEnCarro(@PathVariable("id") Long id, @PathVariable Integer pedido){
 
-        //System.out.println("el pedido recibido: "+pedido);
+
 
         String correoCliente = correoUser();
         Long idCliente = cliente.idPorCorreo(correoCliente);
 
         Producto producto = productoControl.getProductoById(id);
-        System.out.println(producto.getPedido());
+
+        Double precioTotal = producto.getPrecio() * pedido;
+        Double total = redondearDecimales(precioTotal,2);
+
         OrdenDetalle orden = new OrdenDetalle(idCliente,
-                producto.getId(),producto.getPedido(),producto.getPrecio(),
-                producto.getPrecio()*producto.getPedido(),producto.getImagen(),producto.getNombre());
-        producto.setStock(producto.getStock()-producto.getPedido());
+                producto.getId(),pedido,producto.getPrecio(),
+                total,producto.getImagen(),producto.getNombre());
+        producto.setStock(producto.getStock()-pedido);
         detalleControl.save(orden);
 
 
 
-        return "redirect:"+"../carrito";
+        return "redirect:"+"../../carrito";
     }
 
     @RequestMapping(value = "/quitarDeCarro/{id}")
@@ -229,7 +231,7 @@ private ProductoServiceImpl implementacion;
         //producto.setStock(producto.getStock()+1);
 
         detalleControl.delete(id);
-        return "redirect:"+"../carrito";
+        return "redirect:../carrito";
     }
 
     @RequestMapping("/editar")
@@ -271,5 +273,15 @@ private ProductoServiceImpl implementacion;
         return userDetails.getUsername();
     }
 
+    //Redondear Double a 2 decimales
+    public static double redondearDecimales(double valorInicial, int numeroDecimales) {
+        double parteEntera, resultado;
+        resultado = valorInicial;
+        parteEntera = Math.floor(resultado);
+        resultado=(resultado-parteEntera)*Math.pow(10, numeroDecimales);
+        resultado=Math.round(resultado);
+        resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
+        return resultado;
+    }
 
 }

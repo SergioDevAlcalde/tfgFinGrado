@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+<div class="container" style="margin-top:4%;">
+    <img    alt="Gracias"
+            class="img-fluid mx-auto d-block"
+            th:src="@{'/images/gracias.jpg'}"
+    />
+    <div class="jumbotron">
+        <h1 class="font-weight-bold">Muchas gracias por su compra!</h1>
+        <h3 class="font-weight-light">En Breve le enviaremos un mail con los detalles de envío y forma de pago</h3>
+    </div>
+    <a type="button" class="btn btn-primary" th:href="@{../../}" style="margin-bottom: 5%">Seguir Navegando</a>
+</div>
+
+
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+
+
+</body>
+</html>

@@ -104,28 +104,37 @@ public class CarritoController {
     }
 
     @RequestMapping(value = "/finalizar/{id}/{dir}/{cp}")
-    public String finalizar(Model model,@PathVariable("id") Long id,
+    public String finalizar(Model model,@PathVariable("id") Long idCliente,
                             @PathVariable("dir") String dir,
                             @PathVariable("cp") Integer cp){
-
-        System.out.println("id: "+id
-                            + " dir: "+ dir + " cp: "+cp);
-
 
         Date d = new Date();
         java.sql.Date fecha = new java.sql.Date(d.getTime());
 
 
-        Double total = redondearDecimales(totalPedido(id),2);
+        Double total = redondearDecimales(totalPedido(idCliente),2);
 
-        Orden orden = new Orden(fecha,total,id,dir,cp);
+        Orden orden = new Orden(fecha,total,idCliente,dir,cp);
 
         System.out.println(orden.getFecha());
 
         ordenService.save(orden);
 
-        return "redirect:"+"../../../";
+        return "redirect:"+"../../../BorrarCarrito/"+idCliente;
     }
+
+    @RequestMapping(value = "/BorrarCarrito/{id}")
+    public String borrarCarro(Model model,@PathVariable("id") Long idCliente){
+
+        ArrayList<OrdenDetalle> listaOrden = (ArrayList<OrdenDetalle>) detalleControl.getOrdenDetalles(idCliente);
+
+        for(OrdenDetalle ord: listaOrden){
+            detalleControl.delete(ord.getId());
+        }//for
+
+        return "finCompra";
+    }
+
 
     /*
     OTROS METODOS

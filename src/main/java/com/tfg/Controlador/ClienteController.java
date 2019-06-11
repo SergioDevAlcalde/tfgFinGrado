@@ -142,6 +142,30 @@ public class ClienteController {
         return "borrarUsuario";
     }
 
+    @RequestMapping("/datosCliente")
+    public String datosCliente(Model model) {
+
+        String correoCliente = correoUser();
+        Long idCliente = clienteService.idPorCorreo(correoCliente);
+
+        Cliente cliente = clienteService.findOne(idCliente);
+
+        model.addAttribute("cliente",cliente);
+
+        return "datosUsuario";
+    }
+
+
+    //Obtener correo de usuario logueado
+    public String correoUser(){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        return userDetails.getUsername();
+    }
 
 }
 

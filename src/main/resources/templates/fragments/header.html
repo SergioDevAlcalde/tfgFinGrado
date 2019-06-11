@@ -21,7 +21,7 @@
     <h1 class="text-light">ASA Store</h1>
     <div sec:authorize="isAuthenticated()">
         <span class="text-light" >Bienvenido</span><br></br>
-        <a class="text-light" sec:authentication="name" th:href="@{/editarUsuario/}"></a>
+        <a class="text-light" sec:authentication="name" th:href="@{/datosCliente}"></a>
     </div>
     <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#main-navbar">
         <span class="navbar-toggler-icon"></span>

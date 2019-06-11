@@ -12,8 +12,8 @@
 
 <div th:replace="fragments/header :: header">...</div>
 
-<div class="container">
-    <h2>Añadido al carro:</h2>
+<div class="container" style="margin-bottom: 10%">
+    <h2 style="margin-top: 2%;margin-bottom: 2%">Añadido al carro:</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -43,8 +43,8 @@
         </tbody>
     </table>
 
-        <input th:type="button" class="btn-primary btn text-light" onclick="obtenerIdCliente()" value="Confirmar compra"></input>
-        <a type="button" class="btn btn-primary" th:href="@{/}">Seguir Navegando</a>
+        <input style="margin-top: 5%" th:type="button" class="btn-primary btn text-light" onclick="obtenerIdCliente()" value="Confirmar compra"></input>
+        <a style="margin-top: 5%" type="button" class="btn btn-primary" th:href="@{/}">Seguir Navegando</a>
 
 </div>
 

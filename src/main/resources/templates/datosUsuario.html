@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container" style="margin-bottom: 10%">
+    <h1 style="margin-bottom: 2%;margin-top: 2%" class="font-weight-bold">Datos de usuario:</h1>
+    <table class="table table-striped" th:object="${cliente}">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+           <td th:text="${cliente.getNombre()}"></td>
+           <td th:text="${cliente.getApellido()}"></td>
+           <td th:text="${cliente.getCorreoElectronico()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

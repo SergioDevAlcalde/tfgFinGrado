@@ -2,6 +2,7 @@ package com.tfg.Controlador;
 
 import com.tfg.modelo.entity.OrdenDetalle;
 import com.tfg.modelo.service.OrdenDetalleServiceImpl;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,9 @@ public class OrdenDetalleController {
         return "ordenDetalles";
     }
 
-    public String getOne(@PathVariable(value = "id") Long idOrden, Model model){
+    public OrdenDetalle getOne(@PathVariable(value = "id") Long idOrden){
         OrdenDetalle orden_detalle = ordenDetalleService.findOne(idOrden);
-        model.addAttribute("ordenDetalle", orden_detalle);
-
-        return "ordenDetalle";
+        return orden_detalle;
     }
 
     public List<OrdenDetalle> getOrdenDetalles(@PathVariable(value = "id_cliente") Long id){
@@ -50,5 +49,7 @@ public class OrdenDetalleController {
     public void delete(Long id){
         ordenDetalleService.delete(id);
     }
+
+
 
 }

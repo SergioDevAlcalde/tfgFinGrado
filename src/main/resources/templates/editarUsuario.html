@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .row{
+            margin-top:4%;
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+<form action="#" th:action="@{/editarUsuario}" th:object="${objetoEditar}" method="post">
+    <div class="container">
+        <div class="jumbotron bg-light" style="margin:6%">
+            <h4 style="margin-bottom: 6%;">Datos del usuario: </h4>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Nombre de usuario: </h5>
+                </div>
+                <div class="col-3">
+                    <label>Nombre</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-check-input" type="checkbox"/>
+                    <input type="text" th:field="*{nombre}" name="username" id="nombre" class="col-lg-5 text form-control mr-sm-2"
+                           placeholder="Cambiar nombre" required="true" autofocus="true"/>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Primer apellido: </h5>
+                </div>
+                <div class="col-3">
+                    <label>Apellido1</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-check-input" type="checkbox"/>
+                    <input type="text" th:field="*{apellido}" name="username" id="apellido1" class="col-lg-5 text form-control mr-sm-2"
+                           placeholder="Primer apellido" required="true" autofocus="true"/>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <h5>Segundo apellido: </h5>
+                </div>
+                <div class="col-3">
+                    <label>Apellido2</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-check-input" type="checkbox"/>
+                    <input type="text" name="username" id="apellido2" class="col-lg-5 text form-control mr-sm-2"
+                           placeholder="Segundo apellido" required="true" autofocus="true"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <h5>Fecha de creación: </h5>
+                </div>
+                <div class="col-3">
+                    <label>Fecha de creación</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Cambiar contraseña: </h5>
+                </div>
+                <div class="col-3">
+                    <input type="password" name="password" th:field="*{contrasenya}" id="password" class="form-control input-lg"
+                           placeholder="Nueva contraseña" required="true"/>
+                </div>
+                <div class="col-3">
+                    <input type="password" name="password"  id="password2" class="form-control input-lg"
+                           placeholder="Repita la contraseña" required="true"/>
+                </div>
+            </div>
+
+            <div class="col-lg-4 btn-group" style="margin-top:4%;">
+                <input style="margin-right:2%;" type="submit" value="Editar usuario" class="btn btn-primary"/>
+                <a style="margin-left: 2%;" class="btn btn-primary mr-sm-2" th:href="@{/borrarUsuario}" role="button">Borrar Usuario</a>
+                <a style="margin-left: 2%;" class="btn btn-primary mr-sm-2" th:href="@{/}" role="button">Cancelar</a>
+            </div>
+
+
+        </div>
+
+        <div class="valid-feedback">Válido.</div>
+        <div class="invalid-feedback">Introduce el campo.</div>
+    </div>
+
+</form>
+
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

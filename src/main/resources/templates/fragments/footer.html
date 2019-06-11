@@ -3,14 +3,14 @@
       lang="es">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Pie</title>
 </head>
 <body>
 
 <div th:fragment="footer">
     <footer class="text-center">
         <div class="jumbotron bg-dark">
-            <h1 class="text-light">Online Store</h1>
+            <h1 class="text-light">ASA Store</h1>
             <div class="row">
                 <div class="col text-light">Secciones:
                     <p><a th:href="@{/}">Home</a></p>
@@ -19,8 +19,8 @@
                     <p><a th:href="@{/login/}">Login/Registro</a></p>
                     <p><a th:href="@{/carrito/}">Carrito</a></p>
                 </div>
-                <div class="col text-light"><h6>Sobre nosotros</h6>
-                    <p>Si estas leyendo estas líneas, te encuentras ante el proyecto final de los tres alumnos, que se citan encima de este
+                <div class="col-xs-4 col-md text-light"><h6>Sobre nosotros</h6>
+                    <p id="texto">Si estas leyendo estas líneas, te encuentras ante el proyecto final de los tres alumnos, que se citan encima de este
                         texto, correspondiente al Grado Superior en Desarrollo de Aplicaciones Multiplataforma, también conocido como DAM.
                         El citado trabajo consiste en una aplicación web de e-commerce (centrada en la venta de componentes y aparatos informáticos)
                         y desarrollada en las siguientes tecnologías:</p>
@@ -28,8 +28,7 @@
                 <div class="col">
                 <span class="text-light" sec:authorize="isAuthenticated()">
                 Usuario: <span sec:authentication="name"></span>
-                <a th:href="@{/logout}">Sign Out</a> |
-                    <a class="nav-link" th:href="@{/editar/}">Edit</a>
+                <a th:href="@{/logout}">Sign Out</a> | <a th:href="@{/editarUsuario/}">Edit</a>
             </span>
                 </div>
             </div>

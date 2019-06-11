@@ -2,11 +2,22 @@ package com.tfg.modelo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
-@Table(name = "Orden")
+@Table(name = "orden")
 public class Orden implements Serializable {
+
+    public Orden(Date fecha, double total, Long idCliente, String direccion, Integer cpostal) {
+        this.fecha = fecha;
+        this.total = total;
+        this.idCliente = idCliente;
+        this.direccion = direccion;
+        this.cpostal = cpostal;
+    }
+
+    public Orden() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +30,29 @@ public class Orden implements Serializable {
     private double total;
 
     @Column(name = "id_cliente")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idCliente;
+
+    @Column(name = "direccion")
+    String direccion;
+
+    @Column(name = "Cpostal")
+    Integer cpostal;
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Integer getCpostal() {
+        return cpostal;
+    }
+
+    public void setCpostal(Integer cpostal) {
+        this.cpostal = cpostal;
+    }
 
     public Long getId() {
         return id;

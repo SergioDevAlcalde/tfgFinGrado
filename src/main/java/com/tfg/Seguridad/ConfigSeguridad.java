@@ -31,7 +31,7 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/index", "/**/registro", "/**/about","/**/categorias/**","/productosPorCategorias/**", "/**/productoUnico/**").permitAll()
+                .antMatchers("/","/index", "/**/registro", "/**/about","/**/categorias/**","/productosPorCategorias/**", "/**/productoUnico/**", "/cookies/").permitAll()
                 .antMatchers(resources).permitAll()
                 .antMatchers("/carrito").hasAnyRole("USER")
                 .anyRequest().authenticated()

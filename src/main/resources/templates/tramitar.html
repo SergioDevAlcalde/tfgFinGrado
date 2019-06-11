@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+    <div class="jumbotron bg-light">
+
+        <form action="#" method="post" class="container was-validated">
+
+            <h1>Tramitar Pedido </h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="orden: ${detalle}">
+                        <input id="idCliente" th:hidden="true" th:value="${orden.getIdCliente()}"></input>
+                        <input id="cliente" th:hidden="true" th:value="${orden.getIdCliente()}"></input>
+                        <td><img th:src="@{'/images/products/'+${orden.getImagen()}}" alt="producto" height="42" width="42"/></td>
+                        <td th:text="${orden.getNombre_prod()}"></td>
+                        <td th:text="${orden.getCantidad()}"></td>
+                        <td th:text="${orden.getPrecio_prod()}"></td>
+                        <td th:text="${orden.getTotal()}"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th><hr/>
+                        <td th:field="*{total}" th:text="${total}"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div >
+                <strong>Direccion de entrega: </strong><br/>
+                <input id="direccion" type="text" class="col-lg-6 text form-control mr-sm-2" placeholder="Direccion"/>
+                <strong>Codigo postal: </strong><br/>
+                <input id="codPostal" type="number" th:max="99999" th:min="00000" class="col-lg-6 text form-control mr-sm-2" placeholder="Codigo Postal"/><br/>
+                <input th:type="button" onclick="obtenerDatos()" class="btn-primary btn text-light" value="Comprar"></input>
+                <a type="button" class="btn btn-primary" th:href="@{../../carrito}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+<script>
+    function obtenerDatos() {
+        var id = document.getElementById("idCliente").value;
+        var direccion = document.getElementById("direccion").value;
+        var codpos = document.getElementById("codPostal").value;
+
+        window.location="/finalizar/"+id+"/"+direccion+"/"+codpos;
+    }
+</script>
+
+</body>
+</html>

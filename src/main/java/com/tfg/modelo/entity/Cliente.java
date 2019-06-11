@@ -83,6 +83,14 @@ public class Cliente  implements Serializable {
         this.correoElectronico = correoElectronico;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +

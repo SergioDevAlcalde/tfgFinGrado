@@ -22,6 +22,8 @@ public class Cliente  implements Serializable {
     String apellido;
     @NotEmpty
     String contrasenya;
+    @NotEmpty
+    String apellido2;
 
     @Column ( name ="correo_electronico")
     @Email
@@ -89,6 +91,15 @@ public class Cliente  implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
     @Override

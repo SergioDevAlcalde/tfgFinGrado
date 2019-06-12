@@ -37,7 +37,7 @@
                            placeholder="Apellido 1"/>
                     <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}"
                            th:errors="*{apellido}"></small>
-                    <input class="col-lg-3 text form-control mr-sm-2" placeholder="Apellido 2"/>
+                    <input class="col-lg-3 text form-control mr-sm-2" th:field="*{apellido2}" placeholder="Apellido 2"/>
                 </div>
             </div>
 

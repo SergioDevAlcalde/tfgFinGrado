@@ -81,7 +81,7 @@ public class ClienteController {
 
         clienteService.save(clienteEditar);
 
-        return "redirect:/";
+        return "redirect:/logout";
 
     }
 

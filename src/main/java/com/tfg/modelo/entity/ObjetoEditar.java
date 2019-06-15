@@ -5,6 +5,7 @@ public class ObjetoEditar {
     String nombre;
     String apellido;
     String contrasenya;
+    String apellido2;
 
 
     public ObjetoEditar() {
@@ -26,6 +27,14 @@ public class ObjetoEditar {
         this.apellido = apellido;
     }
 
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
     public String getContrasenya() {
         return contrasenya;
     }
@@ -33,4 +42,5 @@ public class ObjetoEditar {
     public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
     }
+
 }

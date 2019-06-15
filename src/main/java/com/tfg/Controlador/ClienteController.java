@@ -128,6 +128,10 @@ public class ClienteController {
             clienteEditar.setApellido(objetoEditar.getApellido());
         }
 
+        if (!clienteEditar.getApellido2().equals(objetoEditar.getApellido2())) {
+            clienteEditar.setApellido2(objetoEditar.getApellido2());
+        }
+
         if (!clienteEditar.getContrasenya().equals(objetoEditar.getContrasenya())) {
             clienteEditar.setContrasenya(objetoEditar.getContrasenya());
         }

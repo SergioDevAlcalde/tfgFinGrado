@@ -12,8 +12,8 @@
 <body>
 <div th:replace="fragments/header :: header">...</div>
 
-<div class="container" style="margin-top:4%; margin-bottom:4%;">
-    <h4 th:tex="${categoriaCategory.getNombre()}">Categoría: </h4>
+<div class="container-fluid" style="margin-top:4%; margin-bottom:4%;">
+    <h4 class="bg-info text-light" style="text-align: center;" th:text="${categoriaCategory.getNombre()}"></h4>
     <div class="row">
         <div class="col-3" th:each="prod: ${ productCategory}">
             <div class="card" style="height:450px; margin-top:10px;">

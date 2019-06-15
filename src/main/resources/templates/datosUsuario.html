@@ -19,6 +19,7 @@
         <tr>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Apellido 2</th>
             <th>Correo</th>
         </tr>
         </thead>
@@ -26,10 +27,12 @@
         <tr>
            <td th:text="${cliente.getNombre()}"></td>
            <td th:text="${cliente.getApellido()}"></td>
+           <td th:text="${cliente.getApellido2()}"></td>
            <td th:text="${cliente.getCorreoElectronico()}"></td>
         </tr>
         </tbody>
     </table>
+    <a type="button" class="btn btn-primary" th:href="@{../../editarUsuario}" style="margin-bottom: 5%">Editar Datos</a>
 </div>
 
 

@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `id` bigint(255) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
+  `apellido2` varchar(255) NOT NULL,
   `contrasenya` varchar(255) NOT NULL,
   `correo_electronico` varchar(255) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL,

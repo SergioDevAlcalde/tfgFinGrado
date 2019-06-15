@@ -5,7 +5,15 @@ public class ObjetoEditar {
     String nombre;
     String apellido;
     String contrasenya;
+    String apellido2;
 
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
 
     public ObjetoEditar() {
     }

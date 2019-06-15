@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head">
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=no"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .card:hover{
+
+            border-radius: 47px 47px 47px 47px;
+            -moz-border-radius: 47px 47px 47px 47px;
+            -webkit-border-radius: 47px 47px 47px 47px;
+            border: 0px solid #000000;
+            transform: translateY(-15px);
+            box-shadow: 0 12px 16px black;
+        }
+
+        .card:hover #tachar-1 {
+            color:red;
+            text-decoration:line-through;
+        }
+
+        @media (min-width: 800px) and (max-width: 1564px) {
+            #cuerpo{
+
+                height:200px;
+            }
+
+        }
+    </style>
 
 </head>
 
@@ -15,15 +42,25 @@
 <div class="container-fluid" style="margin-top:4%; margin-bottom:4%;">
     <h4 class="bg-info text-light" style="text-align: center;" th:text="${categoriaCategory.getNombre()}"></h4>
     <div class="row">
-        <div class="col-3" th:each="prod: ${ productCategory}">
-            <div class="card" style="height:450px; margin-top:10px;">
-                <div class="card-body d-flex flex-column justify-content-around">
-                    <div class="card-header">
-                        <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
+        <div class="col-md-3 col-xs-10 col-sm-12" th:each="prod: ${ productCategory}">
+            <div class="card" style="margin-top:10px;">
+                <div class="card-header">
+                    <img th:src="@{'/images/products/'+${prod.getImagen()}}" alt="producto" class="card-img-top"/>
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <div class="card-body d-flex flex-column justify-content-around" id="cuerpo">
+                        <h4 class="card-title text-dark text-center" th:text="${prod.getNombre()}"></h4>
+                        <h5 class="text-muted text-center">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
+                        <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
                     </div>
-                    <h4 class="card-title text-dark text-center" th:text="${prod.getNombre()}"></h4>
-                    <h5 class="text-muted text-center">$<span class="text-center text-dark" th:text="${prod.getPrecio()}"></span></h5>
-                    <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <div class="card-body d-flex flex-column justify-content-around" id="cuerpo">
+                        <h4 class="card-title text-dark text-center" th:text="${prod.getNombre()}"></h4>
+                        <h6 class="text-muted text-center">$<span id="tachar-1" class="text-center" th:text="${prod.getPrecio()}"></span></h6>
+                        <h5 class="text-muted text-center">$<span class="text-center text-dark" th:text="${prod.getPrecioDescuento()}"></span></h5>
+                        <a th:href="@{'/productoUnico/'+${prod.getId()}}" class="btn btn-primary">Comprar</a>
+                    </div>
                 </div>
             </div>
         </div>

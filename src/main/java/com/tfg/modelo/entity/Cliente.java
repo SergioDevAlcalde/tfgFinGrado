@@ -93,7 +93,6 @@ public class Cliente  implements Serializable {
         this.enabled = enabled;
     }
 
-
     public String getApellido2() {
         return apellido2;
     }

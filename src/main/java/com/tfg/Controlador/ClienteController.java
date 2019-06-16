@@ -28,6 +28,8 @@ public class ClienteController {
     @Autowired
     private HomeController homeController;
 
+    private List<Cliente> clientes;
+
 
     //ESTE METODO SE ENCARGA DE PASARLE EL OBJETO CLIENTE A LA CLASE REGISTROS
     @RequestMapping(value = "/registro")
@@ -47,15 +49,23 @@ public class ClienteController {
     @RequestMapping(value = "/registro", method = RequestMethod.POST)
     public String save(@Valid Cliente cliente, BindingResult result, Model model) {
 
-        if (result.hasErrors()) {
+        clientes= clienteService.findAll();
 
-            model.addAttribute("titulo", "Formulario de cliente");
-            return "registro";
+        for( Cliente cliente1:clientes){
+
+            if (cliente1.getCorreoElectronico().equals(cliente.getCorreoElectronico())){
+                cliente1.setNombre(cliente.getNombre());
+                cliente1.setApellido(cliente.getApellido());
+                cliente1.setApellido2(cliente.getApellido2());
+                cliente1.setContrasenya(cliente.getContrasenya());
+                clienteService.save(cliente1);
+            }else{
+                clienteService.save(cliente);
+            }
         }
 
         System.out.println("CLIENTE" + cliente);
 
-        clienteService.save(cliente);
 
         return "redirect:/";
     }

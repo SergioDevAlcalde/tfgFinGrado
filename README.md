@@ -17,6 +17,14 @@ https://www.linkedin.com/in/sergio-alcalde-casares-b5a15013b/
 
 La aplicacion se basa en una aplicacion web con spring, thymeleaf, bootstrap y mysql como motor de base de datos.
 
+Si alguien esta interesado en mas informacion sobre el trabajo por aqui dejo link directo a la documentacion:
+
+https://drive.google.com/file/d/1zZUECHdyYm54je_yoj8na8osS-Gb-y-C/view?usp=sharing
+
+Tanto el trabajo como la documentacion estan bajo licencia de creative commmons
+
+Para mas dudas teneis nuestros linkedin arriba y os dejo el correo electronico de Sergio Alcalde: verodaht@gmail.com
+
 
 
 
